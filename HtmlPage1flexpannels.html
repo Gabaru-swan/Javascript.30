@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex Panels 💪</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <style>
+        html {
+            box-sizing: border-box;
+            background: #ffc600;
+            font-family: 'Franklin Gothic';
+            font-size: 20px;
+            font-weight: 200;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        .panels {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .panel {
+            background: #6B0F9C;
+            box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            align-items: center;
+            /* Safari transitionend event.propertyName === flex */
+            /* Chrome + FF transitionend event.propertyName === flex-grow */
+            transition: font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11), flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11), background 0.2s;
+            font-size: 20px;
+            background-size: cover;
+            background-position: center;
+            flex: 1;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel1 {
+            background-image: url(https://static.wikia.nocookie.net/onepiece/images/0/06/One_Piece_Stampede.png/revision/latest/scale-to-width-down/700?cb=20190607162200&path-prefix=es);
+        }
+
+        .panel2 {
+            background-image: url(https://pbs.twimg.com/media/FUz_vVnWQAI53wz?format=jpg&name=4096x4096);
+        }
+
+        .panel3 {
+            background-image: url(https://i.pinimg.com/564x/ec/b3/e2/ecb3e2a645133b1d043121e728711caa.jpg);
+        }
+
+        .panel4 {
+            background-image: url(https://blogger.googleusercontent.com/img/a/AVvXsEhJ354yGMYLT36wIwtiO5NqnQkPZTrb7W_qEmwppubWQTAa6THDDb-yQVd4m0vDZi8KKLK-4Oc-u06sSEiqQxQXRJ6e6DMa_opxtPGNJCrqPnvHOcYAx5yX2j7L3a9T61zciPau-C_Ur25-3UdTib3cyicCoe7x2iWpABDBJGLWc_q66j0f9JWr8QbuBQ);
+        }
+
+        .panel5 {
+            background-image: url(https://blogger.googleusercontent.com/img/a/AVvXsEiwTPuEUugVL8C5ouw0xV4UWiEYkwLa8JzxEYVAoNdcaTOs3V_nGLMovEpF2v7c4gQ1PFy5L4Gd9Y_IRv9R3Mz8BRjmrqmXd-Z11cnoLBZo-WdJvHkFsPmnk_13Urc2nB-zH33c63JJVj0R8xuMHetVOBnAIEQ2qINC4_ikifSfyO4yEPAVLXnjMo_eLw);
+        }
+
+        /* Flex Items */
+        .panel > * {
+            margin: 0;
+            width: 100%;
+            transition: transform 0.5s;
+            flex: 1 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .panel > *:first-child {
+                transform: translateY(-100%);
+            }
+
+        .panel.open-active > *:first-child {
+            transform: translateY(0);
+        }
+
+        .panel > *:last-child {
+            transform: translateY(100%);
+        }
+
+        .panel.open-active > *:last-child {
+            transform: translateY(0);
+        }
+
+        .panel p {
+            text-transform: uppercase;
+            font-family: 'Amatic SC', cursive;
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+            font-size: 2em;
+        }
+
+            .panel p:nth-child(2) {
+                font-size: 4em;
+            }
+
+        .panel.open {
+            flex: 5;
+            font-size: 40px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .panel p {
+                font-size: 1em;
+            }
+        }
+    </style>
+
+
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Hey</p>
+            <p>Let's</p>
+            <p>Dance</p>
+        </div>
+        <div class="panel panel2">
+            <p>Give</p>
+            <p>Take</p>
+            <p>Receive</p>
+        </div>
+        <div class="panel panel3">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel4">
+            <p>Give</p>
+            <p>All</p>
+            <p>You can</p>
+        </div>
+        <div class="panel panel5">
+            <p>Life</p>
+            <p>In</p>
+            <p>Motion</p>
+        </div>
+    </div>
+
+    <script>
+const panels = document.querySelectorAll('.panel');
+
+function toggleOpen() {
+            console.log('Hello');
+            this.classList.toggle('open');
+}
+
+function toggleActive(e) {
+            console.log(e.propertyName);
+            if (e.propertyName.includes('flex')) {
+                this.classList.toggle('open-active');
+            }
+}
+
+panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+    </script>
+
+</body>
+</html>
